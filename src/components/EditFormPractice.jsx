@@ -32,17 +32,49 @@ export default function EditFormPractice()
     }
     
     
-    const createUser=()=>{
-        // Swal.fire(response)
-        if(response)
-        {
-            Swal.fire("Sended!","Your Response has been sended,",'success')
-            setResponse('')
-        }else{
-            Swal.fire("Message!","Empty message can not be sent,",'warning')
-        }
-
+  const createUser = () => {
+    if (!response) {
+      Swal.fire("Message!", "Empty message can not be sent,", "warning");
+      return;
     }
+
+    // Create a new object to send in the POST body
+    const requestBody = {
+      email: email,
+      description: description,
+      response: response,
+    };
+
+    // Set options for Fetch API
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    };
+
+    // Call the API
+    fetch(
+      "https://send-email-api.netlify.app/.netlify/functions/app/query",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "Email sent successfully") {
+          Swal.fire("Sended!", "Your Response has been sended,", "success");
+          setResponse("");
+        } else {
+          Swal.fire("Error!", data.message, "error");
+        }
+      })
+      .catch((error) => {
+        Swal.fire(
+          "Error!",
+          "Something went wrong. Please try again later.",
+          "error"
+        );
+      });
+  };
+
 
     return(
     <div>
@@ -65,6 +97,7 @@ export default function EditFormPractice()
               variant="outlined"
               onChange={handleEmailChange}
               value={email}
+              
               sx={{minWidth:"50%"}}
               disabled
 
