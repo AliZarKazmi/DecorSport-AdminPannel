@@ -11,7 +11,9 @@ import { useParams } from 'react-router-dom';
 export default function EditFormPractice()
 {
     const infoQuery = useParams().QueryDescription
-    const infoEmail = useParams().Email
+    // const infoEmail = useParams().Email
+
+    const infoEmail = "fa19-bse-005@cuilahore.edu.pk"
 
     const [email,setEmail] = useState(infoEmail)
     const [description,setDescription] = useState(infoQuery)

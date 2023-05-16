@@ -37,14 +37,20 @@ export default function MaterialTable() {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  },[]);
   
   const getUsers = async () => {
     const data = await getDocs(empCollectionRef);
-    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    // setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const allRows = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    setRows(allRows);
   };
 
-
+//pagination
+const displayedRows = rows.slice(
+  page * rowsPerPage,
+  page * rowsPerPage + rowsPerPage
+);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -77,7 +83,6 @@ export default function MaterialTable() {
     setRows([])
     getUsers();
   };
-
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -148,7 +153,7 @@ export default function MaterialTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {displayedRows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -197,7 +202,7 @@ export default function MaterialTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -205,7 +210,17 @@ export default function MaterialTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /> */}
+
+<TablePagination
+      rowsPerPageOptions={[10, 25, 100]}
+      component="div"
+      count={rows.length}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
     </Paper>
   );
 }
