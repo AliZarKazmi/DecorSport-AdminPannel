@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from "@mui/material/Typography";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 // import AddCircleIcon from "@mui/icons-material/AddCircle";
 // import Button from "@mui/material/Button";
 // import Box from "@mui/material/Box";
@@ -32,7 +34,7 @@ export default function MaterialTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const empCollectionRef = collection(db, "RegisterationForms");
 
   useEffect(() => {
@@ -40,10 +42,20 @@ export default function MaterialTable() {
   },[]);
   
   const getUsers = async () => {
-    const data = await getDocs(empCollectionRef);
-    // setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    const allRows = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setRows(allRows);
+    setIsLoading(true)
+    try{
+      const data = await getDocs(empCollectionRef);
+      // setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const allRows = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setRows(allRows);
+      setIsLoading(false)
+    }
+    catch
+    {
+      alert("error")
+      setIsLoading(false)
+    }
+    
   };
 
 //pagination
@@ -85,7 +97,19 @@ const displayedRows = rows.slice(
   };
 
   return (
+    <>
+    {isLoading?
+      (
+      // <div>Loading...</div>
+      <Box sx={{ display: 'flex', justifyContent:"center",alignItems:"center",height:"100vh" }}>
+      <CircularProgress />
+    </Box>
+      ) : 
+      (
+
+
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      
          <Typography
             gutterBottom
             variant="h5"
@@ -200,6 +224,8 @@ const displayedRows = rows.slice(
                 );
               })}
           </TableBody>
+          
+
         </Table>
       </TableContainer>
       {/* <TablePagination
@@ -221,6 +247,10 @@ const displayedRows = rows.slice(
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     />
+ 
     </Paper>
+    )}
+    </>
+    
   );
 }

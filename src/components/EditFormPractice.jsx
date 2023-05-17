@@ -8,12 +8,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 import { useParams } from 'react-router-dom';
+// import '../../public'
 export default function EditFormPractice()
 {
     const infoQuery = useParams().QueryDescription
-    // const infoEmail = useParams().Email
-
-    const infoEmail = "fa19-bse-005@cuilahore.edu.pk"
+    const infoEmail = useParams().Email
 
     const [email,setEmail] = useState(infoEmail)
     const [description,setDescription] = useState(infoQuery)
@@ -34,49 +33,30 @@ export default function EditFormPractice()
     }
     
     
-  const createUser = () => {
-    if (!response) {
-      Swal.fire("Message!", "Empty message can not be sent,", "warning");
-      return;
-    }
-
-    // Create a new object to send in the POST body
-    const requestBody = {
-      email: email,
-      description: description,
-      response: response,
-    };
-
-    // Set options for Fetch API
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
-    };
-
-    // Call the API
-    fetch(
-      "https://send-email-api.netlify.app/.netlify/functions/app/query",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "Email sent successfully") {
-          Swal.fire("Sended!", "Your Response has been sended,", "success");
-          setResponse("");
-        } else {
-          Swal.fire("Error!", data.message, "error");
+    const createUser=()=>{
+        // Swal.fire(response)
+        if(response)
+        {
+          if(window.Email)
+          {
+            window.Email.send({
+              SecureToken:"2ad0c56c-2a55-47de-8eed-2be00af96c73 ",
+              To : email,
+              From : "fa19-bse-005@cuilahore.edu.pk",
+              Subject : " Decor Spot Admin ",
+              Body : response,
+          }).then(
+            message => Swal.fire(message)
+          );
+              // Swal.fire("Sended!","Your Response has been sended,",'success')
+              setResponse('')
+          }
+          
+        }else{
+            Swal.fire("Message!","Empty message can not be sent,",'warning')
         }
-      })
-      .catch((error) => {
-        Swal.fire(
-          "Error!",
-          "Something went wrong. Please try again later.",
-          "error"
-        );
-      });
-  };
 
+    }
 
     return(
     <div>
@@ -99,7 +79,6 @@ export default function EditFormPractice()
               variant="outlined"
               onChange={handleEmailChange}
               value={email}
-              
               sx={{minWidth:"50%"}}
               disabled
 
@@ -153,3 +132,18 @@ export default function EditFormPractice()
     )
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
