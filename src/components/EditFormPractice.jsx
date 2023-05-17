@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 import { useParams } from 'react-router-dom';
-// import '../../public'
 export default function EditFormPractice()
 {
     const infoQuery = useParams().QueryDescription
@@ -33,8 +32,7 @@ export default function EditFormPractice()
     }
     
     
-    const createUser=()=>{
-        // Swal.fire(response)
+    const mailSend=()=>{
         if(response)
         {
           if(window.Email)
@@ -116,7 +114,7 @@ export default function EditFormPractice()
             <Typography variant='h5' align='center' >
                 <Button variant='contained' 
                     
-                onClick={createUser}
+                onClick={mailSend}
                 >
                     Send
                 </Button>

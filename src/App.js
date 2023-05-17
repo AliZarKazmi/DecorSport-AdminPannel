@@ -9,7 +9,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import MaterialTable from "./components/MaterialTable";
 import MaterialMenu from "./components/MaterialMenu";
 import MaterialCard from "./components/MaterialCard";
-import MaterialQueries from "./components/MaterialQueries";
+// import MaterialQueries from "./components/MaterialQueries";
 import AddPractice from "./components/AddPractice";
 import EditFormPractice from "./components/EditFormPractice";
 
