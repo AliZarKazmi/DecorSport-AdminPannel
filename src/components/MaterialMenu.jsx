@@ -2,8 +2,11 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ProductionQuantityLimitsSharpIcon from '@mui/icons-material/ProductionQuantityLimitsSharp';
+import LightbulbCircleIcon from '@mui/icons-material/LightbulbCircle';
 import PeopleIcon from '@mui/icons-material/People';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -23,9 +26,10 @@ export default function MaterialMenu() {
   return (
     <Tabs value={value} onChange={handleChange} aria-label="icon label tabs example">
        <div className={classes.container}>
-      <Tab icon={<PeopleIcon />} label = "" href="/seller-profile"  sx={{color:"purple"}}/>
-      <Tab icon={< ProductionQuantityLimitsSharpIcon/>}  href="/product" sx={{color:"red"}}/>
-      <Tab icon={< CircleNotificationsIcon/>} label="" href="/query"  sx={{color:"green"}}/>
+       <Tab icon={< AdminPanelSettingsIcon/>} label="" href="/account-verification"  sx={{color:"orange"}} title="Verification"/>
+      <Tab icon={<PeopleIcon />} label = "" href="/seller-profile"  sx={{color:"purple"}} title="Profile"/>
+      <Tab icon={< LightbulbCircleIcon/>}  href="/product" sx={{color:"red"}} title="Posts"/>
+      <Tab icon={< QueryStatsIcon/>} label="" href="/query"  sx={{color:"green"}} title="Query"/>
       </div>
     </Tabs>
   );

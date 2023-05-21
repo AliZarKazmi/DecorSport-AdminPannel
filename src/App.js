@@ -12,6 +12,7 @@ import MaterialCard from "./components/MaterialCard";
 // import MaterialQueries from "./components/MaterialQueries";
 import AddPractice from "./components/AddPractice";
 import EditFormPractice from "./components/EditFormPractice";
+import AccountVerif from "./components/AccountVerif";
 
 
 
@@ -37,6 +38,7 @@ function App() {
           {/* <Route exact path='/seller-profile' component={UserData}/> */}
           <Route exact path='/seller-profile' component={MaterialTable}/>
           {/* <Route exact path='/deocrator-profile' component={UserData}/> */}
+          <Route exact path='/account-verification' component={AccountVerif}/>
           <Route exact path='/product' component={MaterialCard}/>
           <Route exact path='/query' component={AddPractice}/>
           <Route exact path='/' component={CardComp}/>
