@@ -24,8 +24,9 @@ function App() {
       <div >
       <NavbarComp/>
       <div >
-      <Row>
-        <Col xs={12} md={3} >
+
+      <Row >
+        <Col xs={12} md={3}  >
           <Searchbar />
         </Col>
         <Col xs={12} md={9} >
@@ -50,7 +51,6 @@ function App() {
 
     {/* <Searchbar/> */}
     
-      
       
       </div>
     </Router>
