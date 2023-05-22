@@ -137,8 +137,8 @@ export default function AccountVerif() {
         setDoc(doc(collection(db, "RegisterationForms")), {
           Email: email,
           AccountType: accountType,
-          UserRole: userRole,
-          CompanyName: companyName,
+          UserRole: companyName,
+          CompanyName: userRole,
           BusinessDescription: businessDescription,
           WebsiteLink: websiteLink,
           Phone: phone,
@@ -147,15 +147,19 @@ export default function AccountVerif() {
           Address: address,
         })
           .then((res) =>
-            Swal.fire("Congratulations! You are Successfully got registered.")
-          )
+          {
+            Swal.fire("Account has been Succesfully Approve and Verification Email is send to user")
+            verifDel(id);
+          }
+             
+            )
           .catch(() => Swal.fire("Check Your Internet Connection"));
       })
       .catch((error) => {
         Swal.fire(error.message);
       });
 
-
+     
       //sending approval mail to user
       const approvalMail = `We are delighted to inform you that your account registration on our platform has been successfully approved! On behalf of our team, we extend a warm welcome to you.You can now access all the features and benefits of our platform, including the ability to explore a wide range of decoration ideas, connect with decorators and sellers, and find the perfect products for your needs. We hope that this platform becomes a valuable resource for all your endeavors.Please log in to your account using your registered credentials and start enjoying the full experience. If you have any questions, concerns, or require any assistance along the way, our support team is readily available to help you. Feel free to reach out to us via [contact information].
 
@@ -167,7 +171,7 @@ export default function AccountVerif() {
         Subject: " Decor Spot Account Approval - Welcome To Our Plateform ",
         Body: approvalMail,
       });
-      verifDel(id);
+
       setRows([]);
       getUsers();
   };
@@ -175,6 +179,8 @@ export default function AccountVerif() {
   const verifDel = async (id) => {
     const userDoc = doc(db, "VerifyCompany", id);
     await deleteDoc(userDoc);
+    setRows([]);
+    getUsers();
   }
 
   return (
