@@ -6,7 +6,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -16,8 +15,6 @@ import { db } from "../firebaseConfig/Firebase.js";
 import {
   collection,
   getDocs,
-  addDoc,
-  updateDoc,
   deleteDoc,
   doc,
 } from "firebase/firestore";
@@ -27,8 +24,6 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
 export default function MaterialTable() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const empCollectionRef = collection(db, "RegisterationForms");
@@ -41,7 +36,6 @@ export default function MaterialTable() {
     setIsLoading(true);
     try {
       const data = await getDocs(empCollectionRef);
-      // setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       const allRows = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setRows(allRows);
       setIsLoading(false);
@@ -49,21 +43,6 @@ export default function MaterialTable() {
       alert("error");
       setIsLoading(false);
     }
-  };
-
-  //pagination
-  const displayedRows = rows.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   const deleteUser = (id) => {
@@ -93,7 +72,6 @@ export default function MaterialTable() {
   return (
     <>
       {isLoading ? (
-        // <div>Loading...</div>
         <Box
           sx={{
             display: "flex",
@@ -114,67 +92,58 @@ export default function MaterialTable() {
           >
             Account Profiles
           </Typography>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    Images
-                  </TableCell>
-                  <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    CompanyName
-                  </TableCell>
-                  <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    Email
-                  </TableCell>
-
-                  <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    Website Link
-                  </TableCell>
-                  <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    Phone Number
-                  </TableCell>
-                  <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    Account Type
-                  </TableCell>
-
-                  <TableCell align={"left"} style={{ minWidth: "100px" }}>
-                    Action
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {displayedRows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
+          <div style={{ height: 390, overflow: "auto" }}>
+            <TableContainer>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      Images
+                    </TableCell>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      CompanyName
+                    </TableCell>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      Email
+                    </TableCell>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      Website Link
+                    </TableCell>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      Phone Number
+                    </TableCell>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      Account Type
+                    </TableCell>
+                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                      Action
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => {
                     return (
-                      <TableRow hover role="checkbox" tabIndex={-1}>
-                        <TableCell key={row.id} align="left">
-                        <img
+                      <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                        <TableCell align="left">
+                          <img
                             src={row.Logo}
                             alt="Profile"
-                            style={{ borderRadius: '50%', width: '30px', height: '30px' }}
-    />
-
+                            style={{
+                              borderRadius: "50%",
+                              width: "30px",
+                              height: "30px",
+                            }}
+                          />
                         </TableCell>
-                        <TableCell key={row.id} align="left">
-                          {row.CompanyName}
+                        <TableCell align="left">{row.CompanyName}</TableCell>
+                        <TableCell align="left">{row.Email}</TableCell>
+                        <TableCell align="left" cursor="pointer">
+                          <Link href={row.WebsiteLink} target="_blank">
+                            {row.WebsiteLink}
+                          </Link>
                         </TableCell>
-
-                        <TableCell key={row.id} align="left">
-                          {row.Email}
-                        </TableCell>
-
-                        <TableCell key={row.id} align="left" cursor="pointer">
-                          <Link href={row.WebsiteLink} target="_blank">{row.WebsiteLink}</Link>
-                        </TableCell>
-                        <TableCell key={row.id} align="left">
-                          {row.Phone}
-                        </TableCell>
-
-                        <TableCell key={row.id} align="left">
-                          {row.AccountType}
-                        </TableCell>
+                        <TableCell align="left">{row.Phone}</TableCell>
+                        <TableCell align="left">{row.AccountType}</TableCell>
                         <TableCell align="left">
                           <DeleteIcon
                             style={{
@@ -190,20 +159,13 @@ export default function MaterialTable() {
                       </TableRow>
                     );
                   })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </Paper>
       )}
     </>
   );
 }
+
