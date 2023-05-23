@@ -107,7 +107,7 @@ export default function AccountVerif() {
       SecureToken: "2ad0c56c-2a55-47de-8eed-2be00af96c73 ",
       To: email,
       From: "fa19-bse-005@cuilahore.edu.pk",
-      Subject: " Decor Spot Admin - Account Approval Status ",
+      Subject: "Account Status Decline ",
       Body: emailContent,
     });
     setRows([]);
