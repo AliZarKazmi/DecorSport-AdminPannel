@@ -149,7 +149,7 @@ export default function AccountVerif() {
           .then((res) =>
           {
             Swal.fire("Account has been Succesfully Approve and Verification Email is send to user")
-            verifDel(id);
+            // verifDel(id);
           }
              
             )
@@ -171,9 +171,9 @@ export default function AccountVerif() {
         Subject: " Decor Spot Account Approval - Welcome To Our Plateform ",
         Body: approvalMail,
       });
-
-      setRows([]);
-      getUsers();
+      verifDel(id);
+      // setRows([]);
+      // getUsers();
   };
   
   const verifDel = async (id) => {
