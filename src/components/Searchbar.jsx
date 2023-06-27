@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,} from 'react';
+// import { useHistory } from 'react-router-dom';
 import {
   FormControl,
   InputLabel,
@@ -15,12 +16,16 @@ import {
   query,
   where
 } from "firebase/firestore";
+import { Link } from "@mui/material";
+import SearchResult from './SearchResult.jsx';
 
 function Searchbar() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubCategory, setSelectedSubCategory] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
-  
+  // const history = useHistory();
+
+
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
     setSelectedSubCategory(''); 
@@ -35,7 +40,9 @@ function Searchbar() {
   };
 
   const applyFilters = async () => {
-  let filteredQuery;
+    // console.log("Button Clicked");
+
+    let filteredQuery;
   
   if(searchKeyword!="" && selectedCategory!="" && selectedSubCategory!="")
   {
@@ -53,6 +60,8 @@ function Searchbar() {
       }
       else{
         const filteredData = filteredDataSnapshot.docs.map((doc) => doc.data());
+    
+        window.location.href = '/searchResult';
         console.log(filteredData); // Display filtered data on the console
       }
     }
@@ -73,6 +82,7 @@ function Searchbar() {
       const filteredData = filteredDataSnapshot.docs.map((doc) => doc.data());
   
       console.log(filteredData); // Display filtered data on the console
+      window.location.href = '/searchResult';
     }
   }
   
@@ -92,6 +102,7 @@ function Searchbar() {
       const filteredData = filteredDataSnapshot.docs.map((doc) => doc.data());
   
       console.log(filteredData); // Display filtered data on the console
+      window.location.href = '/searchResult';
     }
   }
 
@@ -188,6 +199,7 @@ function Searchbar() {
           style={{ marginTop: '10px', marginLeft: "12px" }}
           fullWidth
           onClick={applyFilters}
+
         >
           Apply Filters
         </Button>
