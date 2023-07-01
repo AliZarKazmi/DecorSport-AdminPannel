@@ -99,8 +99,10 @@ export default function MaterialCard() {
   };
 
   return (
-    <>
+    <div sx={{ width: "100%", overflow: "hidden" }}>
+      <div style={{ height: 600, overflow: "auto" }} >
       {/* Loading Bar */}
+      
       {isLoading ? (
         <Box
           sx={{
@@ -115,6 +117,7 @@ export default function MaterialCard() {
 
         </Box>
       ) : (
+        
         <Row>
           <Col xs={12} md={5}>
             <div className="displayCard">
@@ -126,18 +129,22 @@ export default function MaterialCard() {
                 Products
               </Typography>
 
+              <div>
+
+              </div>
               {cardData.map((data) => {
                 return (
-                  <div className="card" key={data.id}>
-                    <CardActionArea>
+                  <div className="card" key={data.id}  >
+                    <CardActionArea style={{ width: '100%', height: 'auto', position: 'relative', overflow: 'hidden' }}>
                       <CardMedia
-                        component="img"
-                        Height="50%"
-                        width="100%"
+                      style={{ width: '368px', height: '200px',  objectFit: 'cover' }}
+                        // component="img"
+                        // Height="50%"
+                        // width="100%"
                         image={data.Image_1}
                         alt="green iguana"
                       />
-                      <CardContent>
+                      <CardContent >
                         <Typography gutterBottom variant="h6" component="div">
                           {data.ProductName}
                         </Typography>
@@ -187,14 +194,15 @@ export default function MaterialCard() {
                 <div className="card" key={data.id}>
                   <CardActionArea style={{ width: '100%', height: 'auto', position: 'relative', overflow: 'hidden' }}>
                     <CardMedia
-                      component="img"
-                      height="auto"
-                      width="100%"
+                    style={{ width: '368px', height: '230px',  objectFit: 'cover' }}
+                      // component="img"
+                      // height="auto"
+                      // width="100%"
                       image={data.Image_1}
                       alt="green iguana"
-                      position="absolute"
-                      top="50%"
-                      transform='translateY(-50%)'
+                      // position="absolute"
+                      // top="50%"
+                      // transform='translateY(-50%)'
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">
@@ -233,6 +241,8 @@ export default function MaterialCard() {
           </Col>
         </Row>
       )}
-    </>
+      </div>
+    </div>
+    
   );
 }

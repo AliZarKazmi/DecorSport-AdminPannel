@@ -14,7 +14,7 @@ import AddPractice from "./components/AddPractice";
 import EditFormPractice from "./components/EditFormPractice";
 import AccountVerif from "./components/AccountVerif";
 import SearchResult from "./components/SearchResult";
-
+import Login from "./components/Login";
 
 
 
@@ -44,7 +44,7 @@ function App() {
           <Route exact path='/product' component={MaterialCard}/>
           <Route exact path='/query' component={AddPractice}/>
           <Route exact path="/searchResult" component={SearchResult}/>
-          <Route exact path='/' component={CardComp}/>
+          <Route exact path='/' component={Login}/>
           <Route exact path='/response/:Email/:QueryDescription' component={EditFormPractice}/>
       </Switch>
         </Col>
