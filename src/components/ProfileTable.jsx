@@ -20,10 +20,9 @@ import {
 } from "firebase/firestore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 
-export default function MaterialTable() {
+
+export default function ProfileTable() {
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const empCollectionRef = collection(db, "RegisterationForms");
@@ -122,46 +121,48 @@ export default function MaterialTable() {
                 </TableHead>
                 <TableBody>
                   {rows.map((row) => {
-                    if (row.AccountType === "User") {
+                    if (row.UserRole === "Customer") {
                       // Exclude rows with AccountType of "User"
                       return null;
+                    }else{
+                      return (
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                          <TableCell align="left">
+                            <img
+                              src={row.Logo}
+                              alt="Profile"
+                              style={{
+                                borderRadius: "50%",
+                                width: "30px",
+                                height: "30px",
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell align="left">{row.CompanyName}</TableCell>
+                          <TableCell align="left">{row.Email}</TableCell>
+                          <TableCell align="left" cursor="pointer">
+                            <Link href={row.WebsiteLink} target="_blank">
+                              {row.WebsiteLink}
+                            </Link>
+                          </TableCell>
+                          <TableCell align="left">{row.Phone}</TableCell>
+                          <TableCell align="left">{row.AccountType}</TableCell>
+                          <TableCell align="left">
+                            <DeleteIcon
+                              style={{
+                                fontSize: "20px",
+                                color: "darkred",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                deleteUser(row.id);
+                              }}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
                     }
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                        <TableCell align="left">
-                          <img
-                            src={row.Logo}
-                            alt="Profile"
-                            style={{
-                              borderRadius: "50%",
-                              width: "30px",
-                              height: "30px",
-                            }}
-                          />
-                        </TableCell>
-                        <TableCell align="left">{row.CompanyName}</TableCell>
-                        <TableCell align="left">{row.Email}</TableCell>
-                        <TableCell align="left" cursor="pointer">
-                          <Link href={row.WebsiteLink} target="_blank">
-                            {row.WebsiteLink}
-                          </Link>
-                        </TableCell>
-                        <TableCell align="left">{row.Phone}</TableCell>
-                        <TableCell align="left">{row.AccountType}</TableCell>
-                        <TableCell align="left">
-                          <DeleteIcon
-                            style={{
-                              fontSize: "20px",
-                              color: "darkred",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              deleteUser(row.id);
-                            }}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    );
+                    
                   })}
                 </TableBody>
               </Table>

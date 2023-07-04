@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 import { useParams } from 'react-router-dom';
-export default function EditFormPractice()
+export default function SendResponse()
 {
     const infoQuery = useParams().QueryDescription
     const infoEmail = useParams().Email
@@ -44,10 +44,13 @@ export default function EditFormPractice()
               Subject : " Decor Spot Admin ",
               Body : response,
           }).then(
-            message => Swal.fire(message)
-          );
-              // Swal.fire("Sended!","Your Response has been sended,",'success')
-              setResponse('')
+            // (message) =>{ Swal.fire("Successfully Sended!",message)
+            window.location.href='/query'
+        // }
+            );
+            //   Swal.fire("Sended! Successfully")
+            //   setResponse('')
+            //   window.location.href='/query'
           }
           
         }else{
@@ -130,18 +133,3 @@ export default function EditFormPractice()
     )
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

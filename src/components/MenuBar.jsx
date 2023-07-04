@@ -1,10 +1,8 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ProductionQuantityLimitsSharpIcon from '@mui/icons-material/ProductionQuantityLimitsSharp';
 import LightbulbCircleIcon from '@mui/icons-material/LightbulbCircle';
 import PeopleIcon from '@mui/icons-material/People';
-import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-export default function MaterialMenu() {
+export default function MenuBar() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {

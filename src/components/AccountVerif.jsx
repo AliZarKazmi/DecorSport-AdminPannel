@@ -24,10 +24,7 @@ import {
   doc,
   setDoc,
 } from "firebase/firestore";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 
 export default function AccountVerif() {
   const [page, setPage] = useState(0);

@@ -6,12 +6,12 @@ import CardComp from "./practice/CardComp"
 import Searchbar from "./components/Searchbar"
 import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import MaterialTable from "./components/MaterialTable";
-import MaterialMenu from "./components/MaterialMenu";
-import MaterialCard from "./components/MaterialCard";
+import ProfileTable from "./components/ProfileTable";
+import MenuBar from "./components/MenuBar";
+import PostDisplay from "./components/PostDisplay";
 // import MaterialQueries from "./components/MaterialQueries";
-import AddPractice from "./components/AddPractice";
-import EditFormPractice from "./components/EditFormPractice";
+import QuesyDisplay from "./components/QuesyDisplay";
+import SendResponse from "./components/SendResponse";
 import AccountVerif from "./components/AccountVerif";
 import SearchResult from "./components/SearchResult";
 import Login from "./components/Login";
@@ -32,20 +32,20 @@ function App() {
         </Col>
         <Col xs={12} md={9} >
         {/* <Menubar/> */}
-        <MaterialMenu/>
+        <MenuBar/>
         
         <Switch>
             
 
           {/* <Route exact path='/seller-profile' component={UserData}/> */}
-          <Route exact path='/seller-profile' component={MaterialTable}/>
+          <Route exact path='/seller-profile' component={ProfileTable}/>
           {/* <Route exact path='/deocrator-profile' component={UserData}/> */}
           <Route exact path='/account-verification' component={AccountVerif}/>
-          <Route exact path='/product' component={MaterialCard}/>
-          <Route exact path='/query' component={AddPractice}/>
+          <Route exact path='/product' component={PostDisplay}/>
+          <Route exact path='/query' component={QuesyDisplay}/>
           <Route exact path="/searchResult" component={SearchResult}/>
-          <Route exact path='/' component={Login}/>
-          <Route exact path='/response/:Email/:QueryDescription' component={EditFormPractice}/>
+          <Route exact path='/' component={ProfileTable}/>
+          <Route exact path='/response/:Email/:QueryDescription' component={SendResponse}/>
       </Switch>
         </Col>
       </Row>

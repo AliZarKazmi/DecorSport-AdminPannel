@@ -1,22 +1,19 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import "./MaterialCard.css";
+import "./Post.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
-import TableCell from "@mui/material/TableCell";
 import { CardActionArea } from "@mui/material";
 import { db } from "../firebaseConfig/Firebase.js";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
-export default function MaterialCard() {
+export default function PostDisplay() {
   const [cardData, setcardData] = useState([]);
   const [ideaCardData, setIdeaCardData] = useState([]);
   const productCollectionRef = collection(db, "ProductList");
@@ -138,9 +135,6 @@ export default function MaterialCard() {
                     <CardActionArea style={{ width: '100%', height: 'auto', position: 'relative', overflow: 'hidden' }}>
                       <CardMedia
                       style={{ width: '368px', height: '200px',  objectFit: 'cover' }}
-                        // component="img"
-                        // Height="50%"
-                        // width="100%"
                         image={data.Image_1}
                         alt="green iguana"
                       />
@@ -195,14 +189,8 @@ export default function MaterialCard() {
                   <CardActionArea style={{ width: '100%', height: 'auto', position: 'relative', overflow: 'hidden' }}>
                     <CardMedia
                     style={{ width: '368px', height: '230px',  objectFit: 'cover' }}
-                      // component="img"
-                      // height="auto"
-                      // width="100%"
                       image={data.Image_1}
                       alt="green iguana"
-                      // position="absolute"
-                      // top="50%"
-                      // transform='translateY(-50%)'
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">
