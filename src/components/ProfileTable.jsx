@@ -66,6 +66,8 @@ export default function ProfileTable() {
     Swal.fire("Deleted!", "Account has been deleted.", "success");
     setRows([]);
     getUsers();
+
+    
   };
 
   return (

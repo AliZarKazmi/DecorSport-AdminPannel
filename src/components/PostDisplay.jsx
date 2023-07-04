@@ -67,6 +67,7 @@ export default function PostDisplay() {
     Swal.fire("Deleted!", "Post has been deleted.", "success");
     setIdeaCardData([]);
     getIdeas();
+    window.location.reload();
   };
 
   //Warning Message for Sepcifc Idea Deletion
@@ -93,6 +94,7 @@ export default function PostDisplay() {
     Swal.fire("Deleted!", "Post has been deleted.", "success");
     setcardData([]);
     getProducts();
+    window.location.reload();
   };
 
   return (

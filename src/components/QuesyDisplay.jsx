@@ -122,7 +122,7 @@ export default function QuesyDisplay() {
                         </TableCell>
                         <TableCell align="left">
                           <Link
-                            href={`/response/${row.Email}/${row.QueryDescription}`}
+                            href={`/response/${row.Email}/${row.QueryDescription}/${row.id}`}
                           >
                             <EditIcon
                               style={{

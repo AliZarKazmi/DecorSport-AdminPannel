@@ -92,13 +92,12 @@ export default function AccountVerif() {
 
     const emailContent = `
     
-    We hope this email finds you well. We would like to inform you about an important update regarding your account on our platform.After careful consideration, we regret to inform you that your account registration has not been approved by our administrative team at this time.The decision to decline your account was based on certain criteria and requirements that we consider during the approval process. Although your account was not approved at this stage.
+    We hope this email finds you well. We would like to inform you that your account on our platform is "NOT Approved".
+
+    Please note that this does not necessarily mean a permanent rejection.  
     
-    Please note that this does not necessarily mean a permanent rejection. You may have the opportunity to reapply in the future or provide additional information that could strengthen your application.We genuinely appreciate your interest in joining our platform and becoming a part of our community. We value your involvement, and we encourage you to stay connected and explore other ways to engage with our services and content.
     
-    If you have any questions or require further clarification regarding this decision, please do not hesitate to reach out to our support team . We are here to assist you and provide any necessary guidance. 
-    
-    Thank you for your understanding.
+
     `;
     window.Email.send({
       SecureToken: "2ad0c56c-2a55-47de-8eed-2be00af96c73 ",
@@ -158,7 +157,7 @@ export default function AccountVerif() {
 
      
       //sending approval mail to user
-      const approvalMail = `We are delighted to inform you that your account registration on our platform has been successfully approved! On behalf of our team, we extend a warm welcome to you.You can now access all the features and benefits of our platform, including the ability to explore a wide range of decoration ideas, connect with decorators and sellers, and find the perfect products for your needs. We hope that this platform becomes a valuable resource for all your endeavors.Please log in to your account using your registered credentials and start enjoying the full experience. If you have any questions, concerns, or require any assistance along the way, our support team is readily available to help you. Feel free to reach out to us via [contact information].
+      const approvalMail = `We are delighted to inform you that your account registration on our platform has been successfully approved!
 
       Thank you for choosing our platform and being a part of our vibrant community. We look forward to seeing you thrive and make the most out of your journey with us.`
       window.Email.send({
